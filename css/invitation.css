@@ -226,6 +226,16 @@ body{font-size:20px;line-height:1.65}.names{font-size:clamp(64px,15vw,88px);line
   line-height: 1.35;
   border-top: 1px solid color-mix(in srgb, var(--metal) 25%, transparent);
 }
+.story-gallery.single-photo,
+.story-gallery:has(.gallery-card:only-child) {
+  grid-template-columns: 1fr;
+  max-width: 330px;
+  margin: 32px auto 0;
+}
+.story-gallery.single-photo .gallery-photo,
+.story-gallery:has(.gallery-card:only-child) .gallery-photo {
+  height: 380px;
+}
 @media (max-width: 420px) {
   .story-gallery {
     grid-template-columns: 1fr;
@@ -233,6 +243,64 @@ body{font-size:20px;line-height:1.65}.names{font-size:clamp(64px,15vw,88px);line
   }
   .gallery-photo {
     height: 290px;
+  }
+  .story-gallery.single-photo .gallery-photo,
+  .story-gallery:has(.gallery-card:only-child) .gallery-photo {
+    height: 340px;
+  }
+}
+
+.rsvp-contact-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 8px 0 20px;
+}
+.rsvp-contact-radio {
+  display: block;
+  cursor: pointer;
+  margin: 0 !important;
+  position: relative;
+}
+.rsvp-contact-radio input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.rsvp-contact-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--paper) 75%, white);
+  transition: all 0.25s ease;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+.rsvp-contact-name {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 16px;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.rsvp-contact-phone {
+  font-size: 13px;
+  color: var(--accent);
+  margin-top: 4px;
+  letter-spacing: 0.04em;
+}
+.rsvp-contact-radio input:checked + .rsvp-contact-box {
+  background: color-mix(in srgb, var(--accent) 14%, white);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+@media (max-width: 420px) {
+  .rsvp-contact-options {
+    grid-template-columns: 1fr;
   }
 }
 

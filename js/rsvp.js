@@ -1,9 +1,31 @@
-/* WhatsApp RSVP behavior — only provides WhatsApp RSVP as requested. */
+/* WhatsApp RSVP behavior — supports multiple contacts (e.g. Bride & Groom) */
 window.initWeddingRSVP = (form, config, names) => {
-  const phone = String(config.whatsappNumber || '17057618086').replace(/\D/g, '');
-  const displayPhone = config.whatsappPhone || '+1 (705) 761-8086';
+  const contacts = Array.isArray(config.contacts) && config.contacts.length > 0
+    ? config.contacts
+    : [{
+        name: names || 'Couple',
+        phone: config.whatsappPhone || '+91 98765 43210',
+        whatsappNumber: String(config.whatsappNumber || '919876543210').replace(/\D/g, '')
+      }];
+
+  const hasMultipleContacts = contacts.length > 1;
 
   form.innerHTML = `
+    ${hasMultipleContacts ? `
+      <label>Choose RSVP recipient</label>
+      <div class="rsvp-contact-options" id="rsvp-contact-options" role="radiogroup" aria-label="Select RSVP recipient">
+        ${contacts.map((c, i) => `
+          <label class="rsvp-contact-radio">
+            <input type="radio" name="recipientIndex" value="${i}" ${i === 0 ? 'checked' : ''}>
+            <span class="rsvp-contact-box">
+              <span class="rsvp-contact-name">${c.name}</span>
+              <span class="rsvp-contact-phone">${c.phone}</span>
+            </span>
+          </label>
+        `).join('')}
+      </div>
+    ` : ''}
+
     <label for="rsvp-name">Your Full Name</label>
     <input id="rsvp-name" name="guestName" autocomplete="name" maxlength="120" placeholder="Please enter your full name" required>
     
@@ -28,13 +50,21 @@ window.initWeddingRSVP = (form, config, names) => {
       Confirm RSVP via WhatsApp
     </button>
 
-    <div class="whatsapp-direct-wrap" style="text-align:center;margin-top:16px;">
-      <a class="action secondary whatsapp-direct-link" target="_blank" rel="noopener noreferrer" href="https://wa.me/${phone}?text=${encodeURIComponent(`Hi Rhea & Adithya, I would like to RSVP for your wedding on November 21st, 2026!`)}">
-        Direct WhatsApp: ${displayPhone}
-      </a>
+    <div class="whatsapp-direct-wrap" style="text-align:center;margin-top:22px;">
+      <p style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75;margin:0 0 10px;">Direct WhatsApp RSVP</p>
+      <div class="whatsapp-direct-list" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
+        ${contacts.map(c => {
+          const cPhone = String(c.whatsappNumber || c.phone).replace(/\D/g, '');
+          return `
+            <a class="action secondary whatsapp-direct-link" target="_blank" rel="noopener noreferrer" href="https://wa.me/${cPhone}?text=${encodeURIComponent(`Hi ${c.name}, I would like to RSVP for Rhea & Adithya's wedding on November 21st, 2026!`)}">
+              ${c.name}: ${c.phone}
+            </a>
+          `;
+        }).join('')}
+      </div>
     </div>
 
-    <p class="rsvp-help" role="status">Your response will open in WhatsApp to ${displayPhone}. Please tap 'Send' to confirm!</p>
+    <p class="rsvp-help" role="status">Your response will open in WhatsApp. Please tap 'Send' to confirm!</p>
   `;
 
   const name = form.querySelector('#rsvp-name');
@@ -65,8 +95,14 @@ window.initWeddingRSVP = (form, config, names) => {
     const guestCount = attending ? count.value : '0';
     const guestNote = note.value.trim();
 
+    const selectedRadio = form.querySelector('input[name="recipientIndex"]:checked');
+    const contactIdx = selectedRadio ? parseInt(selectedRadio.value, 10) : 0;
+    const targetContact = contacts[contactIdx] || contacts[0];
+    const targetPhone = String(targetContact.whatsappNumber || targetContact.phone).replace(/\D/g, '');
+
     let text = `*Wedding RSVP — ${names}*\n`;
     text += `📅 Saturday, 21 November 2026 · Bolgatty Event Center, Kochi\n\n`;
+    text += `*To:* ${targetContact.name}\n`;
     text += `*Guest Name:* ${guestName}\n`;
     text += `*Attendance:* ${attending ? 'Joyfully accepts' : 'Regretfully declines'}\n`;
     if (attending) {
@@ -77,8 +113,8 @@ window.initWeddingRSVP = (form, config, names) => {
     }
     text += `\nSent with love via wedding invitation.`;
 
-    const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+    const waUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(text)}`;
     window.open(waUrl, '_blank');
-    help.textContent = `Opening WhatsApp to send your RSVP to ${displayPhone}. Thank you!`;
+    help.textContent = `Opening WhatsApp to send your RSVP to ${targetContact.name} (${targetContact.phone}). Thank you!`;
   });
 };

@@ -65,7 +65,7 @@
           <p class="story-body">We are so excited to celebrate our love story and this next chapter with all of you!</p>
         </div>
         ${data.gallery && data.gallery.length ? `
-          <div class="story-gallery reveal">
+          <div class="story-gallery reveal${data.gallery.length === 1 ? ' single-photo' : ''}">
             ${data.gallery.map(img => `
               <figure class="gallery-card">
                 <img class="gallery-photo" src="${text(safeURL(img.src))}" alt="${text(img.caption)}" loading="lazy">
@@ -87,6 +87,7 @@
         <p class="countdown-note" id="countdown-note">${text(data.wedding.longDate)}</p>
       </section>
 
+      ${data.schedule && data.schedule.length ? `
       <section class="paper-section floral schedule-section" aria-labelledby="schedule-title">
         <h2 class="script reveal" id="schedule-title">Every lovely moment</h2>
         <ol class="timeline">
@@ -100,10 +101,11 @@
         </ol>
         <p class="schedule-note">${text(data.wedding.scheduleNote)}</p>
       </section>
+      ` : ''}
 
       <section class="paper-section venue-section torn" aria-labelledby="venue-title">
         <h2 class="script reveal" id="venue-title">Where we celebrate</h2>
-        <img class="venue-scene reveal" src="${text(safeURL(data.gallery?.[2]?.src || asset('hero-first.png')))}" alt="Bolgatty Event Center celebration" loading="lazy">
+        <img class="venue-scene reveal" src="${text(safeURL(data.venue?.sceneImage || data.gallery?.[2]?.src || './media/couple-cake.png'))}" alt="Bolgatty Event Center celebration" loading="lazy">
         <p class="venue-caption">${text(data.venue.sceneCaption)}</p>
         <div class="location-frame reveal">
           <h3 class="venue-name">${text(data.venue.name)}</h3>
@@ -118,17 +120,23 @@
         <p class="travel-note">${text(data.venue.note)}</p>
       </section>
 
+      ${data.details && (data.details.dressCode || data.details.giftPreference) ? `
       <section class="paper-section floral etiquette" aria-label="Guest details">
+        ${data.details.dressCode ? `
         <article class="reveal">
           <h2 class="script">Dress code</h2>
           <p>${text(data.details.dressCode)}</p>
         </article>
-        <div class="rule" aria-hidden="true"></div>
+        ` : ''}
+        ${data.details.dressCode && data.details.giftPreference ? '<div class="rule" aria-hidden="true"></div>' : ''}
+        ${data.details.giftPreference ? `
         <article class="reveal">
           <h2 class="script">Your presence, our present</h2>
           <p>${text(data.details.giftPreference)}</p>
         </article>
+        ` : ''}
       </section>
+      ` : ''}
 
       <section class="paper-section floral rsvp-section" aria-labelledby="rsvp-title">
         <div class="rsvp-card reveal">
@@ -161,7 +169,6 @@
         <div class="closing-colophon">
           <button class="reopen" id="reopen">Open the envelope again <span aria-hidden="true">↺</span></button>
           <a class="dearly-signature" href="#" aria-label="Rhea & Adithya Wedding">Rhea &amp; Adithya<small>Made for our forever</small></a>
-          ${data.media.music && data.media.musicTitle ? `<p class="music-credit">Soundtrack: <a href="${text(safeURL(data.media.musicSource))}" target="_blank" rel="noopener noreferrer">${text(data.media.musicTitle)}</a><br><small>Playing softly · Tap controls below to adjust</small></p>` : ''}
         </div>
       </footer>
     </main>

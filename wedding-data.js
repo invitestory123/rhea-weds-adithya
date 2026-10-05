@@ -23,18 +23,6 @@ window.WEDDING_DATA = {
   },
   "gallery": [
     {
-      "src": "./media/couple-forest.jpg",
-      "caption": "Hand in hand, into our forever"
-    },
-    {
-      "src": "./media/couple-dinner.jpg",
-      "caption": "Laughter & quiet glances"
-    },
-    {
-      "src": "./media/couple-cake.png",
-      "caption": "Celebrating our sweetest moments"
-    },
-    {
       "src": "./media/couple-walk.jpg",
       "caption": "From our first hello to eternity"
     }
@@ -46,45 +34,35 @@ window.WEDDING_DATA = {
     "dateISO": "2026-11-21T17:30:00+05:30",
     "endISO": "2026-11-21T22:30:00+05:30",
     "salutation": "Dear Family and Friends,",
-    "invitationNote": "With joyous hearts and the blessings of our parents, we invite you to share in our wedding celebration. Come for the vows, stay for the laughter, and help us make memories to treasure forever.",
-    "scheduleNote": "All times are Indian Standard Time (IST)."
+    "invitationNote": "With joyous hearts and the blessings of our parents, we invite you to share in our wedding celebration. Come for the vows, stay for the laughter, and help us make memories to treasure forever."
   },
-  "schedule": [
-    {
-      "title": "Welcome & Guest Arrival",
-      "time": "5:30 PM"
-    },
-    {
-      "title": "Wedding Ceremony & Vows",
-      "time": "6:00 PM"
-    },
-    {
-      "title": "Photography & Felicitation",
-      "time": "7:00 PM"
-    },
-    {
-      "title": "Dinner & Festivities",
-      "time": "7:30 PM"
-    }
-  ],
   "venue": {
     "name": "Bolgatty Event Center",
     "address": "966A, National Highway, Mulavukad, Kochi, Ernakulam, Keralam 682504, India",
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bolgatty+Event+Center,+966A+National+Highway,+Mulavukad,+Kochi,+Ernakulam,+Kerala+682504",
     "timeLabel": "Saturday, 21 November 2026 · 5:30 PM",
     "sceneCaption": "Bolgatty Event Center · Mulavukad, Kochi",
+    "sceneImage": "./media/couple-cake.png",
     "note": "Valet and guest parking available at the venue."
   },
-  "details": {
-    "dressCode": "Festive & Formal attire. Dress to celebrate with us!",
-    "giftPreference": "Your presence and blessings are our greatest gift."
-  },
   "rsvp": {
-    "whatsappPhone": "+1 (705) 761-8086",
-    "whatsappNumber": "17057618086",
     "heading": "Join Our Celebration",
     "note": "We would love to celebrate with you. Please let us know if you can make it via WhatsApp.",
-    "deadline": "November 10th, 2026"
+    "deadline": "November 10th, 2026",
+    "contacts": [
+      {
+        "name": "Rhea (Bride)",
+        "phone": "+91 98765 43210",
+        "whatsappNumber": "919876543210"
+      },
+      {
+        "name": "Adithya (Groom)",
+        "phone": "+91 98765 43211",
+        "whatsappNumber": "919876543211"
+      }
+    ],
+    "whatsappPhone": "+91 98765 43210",
+    "whatsappNumber": "919876543210"
   },
   "media": {
     "openingVideo": "./media/opening.mp4",
@@ -93,7 +71,7 @@ window.WEDDING_DATA = {
     "heroPoster": "./media/couple-forest.jpg",
     "closingPoster": "./media/couple-dinner.jpg",
     "music": "./media/music.mp3",
-    "musicTitle": "Indila - Love Story (Violin Version by ViOLiNiA)",
-    "musicSource": "https://www.youtube.com/watch?v=oqB1lD4teDU"
+    "musicTitle": "",
+    "musicSource": ""
   }
 };
