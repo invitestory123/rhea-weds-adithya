@@ -52,17 +52,17 @@ window.WEDDING_DATA = {
     "contacts": [
       {
         "name": "Rhea (Bride)",
-        "phone": "+91 98765 43210",
-        "whatsappNumber": "919876543210"
+        "phone": "+91 98452 46111",
+        "whatsappNumber": "919845246111"
       },
       {
         "name": "Adithya (Groom)",
-        "phone": "+91 98765 43211",
-        "whatsappNumber": "919876543211"
+        "phone": "+91 81222 49243",
+        "whatsappNumber": "918122249243"
       }
     ],
-    "whatsappPhone": "+91 98765 43210",
-    "whatsappNumber": "919876543210"
+    "whatsappPhone": "+91 98452 46111",
+    "whatsappNumber": "919845246111"
   },
   "media": {
     "openingVideo": "./media/opening.mp4",
