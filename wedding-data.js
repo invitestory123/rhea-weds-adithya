@@ -23,7 +23,7 @@ window.WEDDING_DATA = {
   },
   "gallery": [
     {
-      "src": "./media/couple-walk.jpg",
+      "src": "./media/couple-road.jpg",
       "caption": "From our first hello to eternity"
     }
   ],
@@ -68,7 +68,7 @@ window.WEDDING_DATA = {
     "openingVideo": "./media/opening.mp4",
     "openingPoster": "./media/opening-poster.jpg",
     "heroVideo": "",
-    "heroPoster": "./media/couple-forest.jpg",
+    "heroPoster": "./media/couple-park.jpg",
     "closingPoster": "./media/couple-dinner.jpg",
     "music": "./media/music.mp3",
     "musicTitle": "",
